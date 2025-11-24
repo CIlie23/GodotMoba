@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldpiuvbutqbk"]
+
+[sub_resource type="GDScript" id="GDScript_xy640"]
+script/source = "extends Node3D
+@onready var camera: Camera3D = $Camera3D
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"left_click\"):
+		var mouse_pos = get_viewport().get_mouse_position()
+		print(mouse_pos)
+		
+		var from = camera.project_ray_orign(mouse_pos)
+		var to = from + camera.project_ray_normal(mouse_pos) + camera.distance_from_camera
+		
+		get_node(\"Player\").global_transform.origin = to
+"
+
+[node name="camHandler" type="Node3D"]
+script = SubResource("GDScript_xy640")
+
+[node name="Camera3D" type="Camera3D" parent="."]

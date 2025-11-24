@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://imqdcsglbfvl"]
+
+[ext_resource type="PackedScene" uid="uid://c3eoknc2u8bt3" path="res://Scenes/Player/player.tscn" id="1_ci6au"]
+[ext_resource type="PackedScene" uid="uid://cslus4x75gx5f" path="res://Scenes/performative_cube.tscn" id="2_26yhd"]
+[ext_resource type="PackedScene" uid="uid://4ehgm6wxehf1" path="res://Scenes/minion_spawner.tscn" id="3_p3ir5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ci6au"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_26yhd"]
+sky_material = SubResource("ProceduralSkyMaterial_ci6au")
+
+[sub_resource type="Environment" id="Environment_p3ir5"]
+background_mode = 2
+sky = SubResource("Sky_26yhd")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_26yhd"]
+vertices = PackedVector3Array(-2.5, -0.37785625, -3.095192, -2.5, -0.37785625, -0.84519196, 3, -0.37785625, -1.095192, 3, -0.37785625, -4.595192, 3.75, -0.37785625, -5.345192, 9, -0.37785625, -5.345192, 9, -0.37785625, -21.095192, -3.25, -0.37785625, -3.845192, -9, -0.37785625, -21.095192, -9, -0.37785625, -3.845192, 5, 3.8721437, -3.345192, 5, 3.8721437, -0.095191956, 8.25, 3.8721437, -0.095191956, 8.25, 3.8721437, -3.345192, 5.25, -0.37785625, -3.095192, 5.25, -0.37785625, -0.34519196, 8, -0.37785625, -0.34519196, 8, -0.37785625, -3.095192, -7.75, 3.8721437, -1.845192, -7.75, 3.8721437, 1.404808, -4.5, 3.8721437, 1.404808, -4.5, 3.8721437, -1.845192, -7.5, -0.37785625, -1.595192, -7.5, -0.37785625, 1.154808, -4.75, -0.37785625, 1.154808, -4.75, -0.37785625, -1.595192, 3, -0.37785625, 1.154808, -2.5, -0.37785625, 2.654808, -3.25, -0.37785625, 3.404808, -9, -0.37785625, 3.404808, -9, -0.37785625, 21.154808, 3.75, -0.37785625, 1.904808, 9, -0.37785625, 21.154808, 9, -0.37785625, 1.904808)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(3, 0, 7), PackedInt32Array(3, 7, 4), PackedInt32Array(4, 7, 9), PackedInt32Array(4, 9, 8), PackedInt32Array(4, 8, 6), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(2, 26, 1), PackedInt32Array(1, 26, 27), PackedInt32Array(30, 29, 28), PackedInt32Array(27, 26, 31), PackedInt32Array(27, 31, 28), PackedInt32Array(28, 31, 33), PackedInt32Array(28, 33, 32), PackedInt32Array(28, 32, 30)]
+agent_radius = 0.99
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_58wgy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26yhd"]
+albedo_color = Color(0, 0.23529412, 0, 1)
+
+[node name="Map" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3ir5")
+
+[node name="Player" parent="." instance=ExtResource("1_ci6au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5721078, 7.2628326)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_26yhd")
+
+[node name="PerformativeCube" parent="NavigationRegion3D" instance=ExtResource("2_26yhd")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.118488, 0.87214375, -0.27185726)
+
+[node name="PerformativeCube2" parent="NavigationRegion3D" instance=ExtResource("2_26yhd")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 6.623079, 0.87214375, -1.6086755)
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 22.095192, 0, -0.8165903, 0)
+mesh = SubResource("PlaneMesh_58wgy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_26yhd")
+
+[node name="MinionSpawner" parent="." instance=ExtResource("3_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02652359, 0, 21.354937)

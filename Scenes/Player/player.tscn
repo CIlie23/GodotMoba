@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3eoknc2u8bt3"]
+
+[ext_resource type="Script" uid="uid://boxs2co8eojla" path="res://Scenes/Player/player.gd" id="1_uvnfx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f60y1"]
+size = Vector3(1, 2.3378906, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_uvnfx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.06894532, 0)
+shape = SubResource("BoxShape3D_f60y1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_v0iea")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 7.810693, 4.905638)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

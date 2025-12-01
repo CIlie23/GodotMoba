@@ -3,11 +3,14 @@
 [sub_resource type="BoxMesh" id="BoxMesh_6sc2c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uymqj"]
+size = Vector3(0.32086182, 1.0185547, 4.871521)
 
 [node name="PerformativeCube" type="StaticBody3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.22854099, 0, 0, 0, 1, 0, 0, 0, 4.7461863, 0, 0, 0)
 mesh = SubResource("BoxMesh_6sc2c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00015258789, 0.009277344, -0.043304443)
 shape = SubResource("BoxShape3D_uymqj")

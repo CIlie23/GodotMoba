@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		var intersection = ground_plane.intersects_ray(from, dir)
 
 		if intersection != null:
-			print("Hit at: ", intersection)
+			#print("Hit at: ", intersection)
 			navigation_target_position = Vector3(intersection.x, global_position.y, intersection.z)
 			agent.set_target_position(navigation_target_position)
 			

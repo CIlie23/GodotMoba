@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://tif87si47cxd"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_6ejs2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_khgrm"]
+size = Vector3(2.001892, 1, 1.993866)
+
+[node name="Nexus" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_6ejs2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007965088, 0, 0.0039520264)
+shape = SubResource("BoxShape3D_khgrm")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbquuf8db7bxa"]
+
+[ext_resource type="Script" uid="uid://uglb6jhki7n4" path="res://Characters/Minions/minion_blu.gd" id="1_m23wp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4fpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m23wp"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i5vt7"]
+material = SubResource("StandardMaterial3D_m23wp")
+
+[node name="Minion" type="CharacterBody3D"]
+script = ExtResource("1_m23wp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_s4fpc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_i5vt7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true

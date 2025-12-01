@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://4ehgm6wxehf1"]
+[gd_scene load_steps=5 format=3 uid="uid://4ehgm6wxehf1"]
 
 [ext_resource type="Script" uid="uid://lo0y7l2ovlm5" path="res://Scenes/minion_spawner.gd" id="1_vfssc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vfssc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ls1nl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ls1nl"]
 albedo_color = Color(0, 0, 1, 1)
 
-[node name="MinionSpawner" type="Node3D"]
+[node name="MinionSpawner" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_vfssc")
 script = ExtResource("1_vfssc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_ls1nl")
 surface_material_override/0 = SubResource("StandardMaterial3D_ls1nl")
 

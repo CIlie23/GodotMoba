@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://imqdcsglbfvl"]
+[gd_scene load_steps=15 format=3 uid="uid://imqdcsglbfvl"]
 
 [ext_resource type="PackedScene" uid="uid://c3eoknc2u8bt3" path="res://Scenes/Player/player.tscn" id="1_ci6au"]
 [ext_resource type="Script" uid="uid://vwiswdxafajb" path="res://Scenes/map.gd" id="1_np2xp"]
@@ -31,6 +31,8 @@ albedo_color = Color(0, 0.23529412, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p3ir5"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_np2xp"]
+
 [node name="Map" type="Node3D"]
 script = ExtResource("1_np2xp")
 
@@ -38,7 +40,7 @@ script = ExtResource("1_np2xp")
 environment = SubResource("Environment_p3ir5")
 
 [node name="Player" parent="." instance=ExtResource("1_ci6au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.83835, 0.5721078, 11.078674)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.83835, 0.5721078, 6.6162777)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 0)
@@ -92,34 +94,75 @@ texture = ExtResource("3_myvm1")
 [node name="TopLane" type="Node" parent="."]
 
 [node name="MinionSpawner" parent="TopLane" node_paths=PackedStringArray("tower", "nexus") instance=ExtResource("3_p3ir5")]
-transform = Transform3D(0.9999092, 0, 0.013473534, 0, 1, 0, -0.013473534, 0, 0.9999092, -23.926203, 1, 2.111858)
-tower = NodePath("../Tower/WP1")
-nexus = NodePath("../../Nexus/NexusWP")
+transform = Transform3D(0.9999092, 0, 0.013473534, 0, 1, 0, -0.013473534, 0, 0.9999092, -22.190899, 1, 5.0311723)
+surface_material_override/0 = SubResource("StandardMaterial3D_np2xp")
+tower = NodePath("../RedTeam/Tower/WP1")
+nexus = NodePath("../../RedNexus/NexusWP")
 
-[node name="Tower" parent="TopLane" instance=ExtResource("4_myvm1")]
+[node name="MinionSpawner2" parent="TopLane" node_paths=PackedStringArray("tower", "nexus") instance=ExtResource("3_p3ir5")]
+transform = Transform3D(0.9999092, 0, 0.013473534, 0, 1, 0, -0.013473534, 0, 0.9999092, 15.362675, 1, -16.77413)
+surface_material_override/0 = SubResource("StandardMaterial3D_np2xp")
+tower = NodePath("../BlueTeam/Tower/WP1")
+nexus = NodePath("../../BlueNexus/NexusWP")
+
+[node name="RedTeam" type="Node" parent="TopLane"]
+
+[node name="Tower" parent="TopLane/RedTeam" instance=ExtResource("4_myvm1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.712196, 0, -19.693056)
 
-[node name="WP1" type="Marker3D" parent="TopLane/Tower"]
+[node name="WP1" type="Marker3D" parent="TopLane/RedTeam/Tower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2971115, 0, -0.39631462)
+gizmo_extents = 3.0
+
+[node name="BlueTeam" type="Node" parent="TopLane"]
+
+[node name="Tower" parent="TopLane/BlueTeam" instance=ExtResource("4_myvm1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.86568, 0, 2.1172209)
+
+[node name="WP1" type="Marker3D" parent="TopLane/BlueTeam/Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2971115, 0, -0.39631462)
 gizmo_extents = 3.0
 
 [node name="BotLane" type="Node" parent="."]
 
 [node name="MinionSpawner2" parent="BotLane" node_paths=PackedStringArray("tower", "nexus") instance=ExtResource("3_p3ir5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.787562, 1, 15.69198)
-tower = NodePath("../Tower2/WP1")
-nexus = NodePath("../../Nexus/NexusWP")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.67495, 1, 12.529333)
+tower = NodePath("../RedTeam/Tower2/WP1")
+nexus = NodePath("../../RedNexus/NexusWP")
 
-[node name="Tower2" parent="BotLane" instance=ExtResource("4_myvm1")]
+[node name="MinionSpawner3" parent="BotLane" node_paths=PackedStringArray("tower", "nexus") instance=ExtResource("3_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.878632, 1, -8.952186)
+tower = NodePath("../BlueTeam/Tower2/WP1")
+nexus = NodePath("../../BlueNexus/NexusWP")
+
+[node name="RedTeam" type="Node" parent="BotLane"]
+
+[node name="Tower2" parent="BotLane/RedTeam" instance=ExtResource("4_myvm1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.40227, 0, -6.094766)
 
-[node name="WP1" type="Marker3D" parent="BotLane/Tower2"]
+[node name="WP1" type="Marker3D" parent="BotLane/RedTeam/Tower2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04785347, 0, 0.08774042)
 gizmo_extents = 3.0
 
-[node name="Nexus" parent="." instance=ExtResource("5_q0mm3")]
+[node name="BlueTeam" type="Node" parent="BotLane"]
+
+[node name="Tower2" parent="BotLane/BlueTeam" instance=ExtResource("4_myvm1")]
+transform = Transform3D(0.9984737, 0, -0.05522901, 0, 1, 0, 0.05522901, 0, 0.9984737, -15.968706, 0, 15.48769)
+
+[node name="WP1" type="Marker3D" parent="BotLane/BlueTeam/Tower2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04785347, 0, 0.08774042)
+gizmo_extents = 3.0
+
+[node name="RedNexus" parent="." instance=ExtResource("5_q0mm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.544226, 0, -15.001065)
 
-[node name="NexusWP" type="Marker3D" parent="Nexus"]
+[node name="NexusWP" type="Marker3D" parent="RedNexus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043367386, 0, -0.008810043)
+gizmo_extents = 3.0
+
+[node name="BlueNexus" parent="." instance=ExtResource("5_q0mm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.784077, 0, 11.006835)
+
+[node name="NexusWP" type="Marker3D" parent="BlueNexus"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043367386, 0, -0.008810043)
 gizmo_extents = 3.0

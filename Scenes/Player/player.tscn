@@ -17,7 +17,7 @@ shape = SubResource("BoxShape3D_f60y1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_v0iea")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." groups=["REDPlayer"]]
 transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 7.810693, 4.905638)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

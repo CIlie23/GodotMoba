@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 
 @export var speed: float = 8.0
-var navigation_target_position: Vector3 # Renamed to be more descriptive
+var navigation_target_position: Vector3 
 
 func _ready() -> void:
 	navigation_target_position = global_position

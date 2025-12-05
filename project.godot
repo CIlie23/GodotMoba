@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Global="*res://Autoload/Global.gd"
 
+[global_group]
+
+BLUEplayer=""
+REDPlayer=""
+
 [input]
 
 left_click={

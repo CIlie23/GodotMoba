@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://covs7kkgepogp"]
+
+[ext_resource type="Script" uid="uid://uglb6jhki7n4" path="res://Characters/Minions/minion_script.gd" id="1_4rjua"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4fpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m23wp"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i5vt7"]
+material = SubResource("StandardMaterial3D_m23wp")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4rjua"]
+height = 2.0004272
+radius = 6.0166016
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rjua"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ugtf"]
+bg_color = Color(1, 0.27450982, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k6wgx"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MinionRed" type="CharacterBody3D" groups=["REDminion"]]
+script = ExtResource("1_4rjua")
+team = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_s4fpc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_i5vt7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="MinionRangeArea" type="Area3D" parent="."]
+
+[node name="MinionRange" type="CollisionShape3D" parent="MinionRangeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00021362305, 0)
+shape = SubResource("CylinderShape3D_4rjua")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(150, 27)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+offset_right = 150.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_4rjua")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8ugtf")
+show_percentage = false
+
+[node name="healthBar" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2345202, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_k6wgx")
+
+[connection signal="body_entered" from="MinionRangeArea" to="." method="_on_minion_range_area_body_entered"]
+[connection signal="body_exited" from="MinionRangeArea" to="." method="_on_minion_range_area_body_exited"]

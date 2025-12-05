@@ -6,9 +6,10 @@ extends Node3D
 #@export var lane_path: Node3D  
 @export var tower: Marker3D
 @export var nexus: Marker3D
+@export var isSpanwerOn: bool
 var towerPath: Array[Vector3] = []
-const MINION_BLU = preload("uid://bbquuf8db7bxa")
-
+#const MINION_BLU = preload("uid://bbquuf8db7bxa")
+@export var minion: PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	towerPath = [
@@ -23,6 +24,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_time_between_spawn_timeout() -> void:
-	var minion_blue = MINION_BLU.instantiate()
-	add_child(minion_blue)
-	minion_blue.set_waypoints(towerPath)
+	if isSpanwerOn == true:
+		var minion_instance = minion.instantiate()
+		add_child(minion_instance)
+		minion_instance.set_waypoints(towerPath)
+		
